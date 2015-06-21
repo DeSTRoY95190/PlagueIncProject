@@ -14,7 +14,7 @@ public class Dictionnary {
 	private File 			file;
 	private FileReader 		_rw;
 	private BufferedReader 	reader;
-	
+	private String 			finded;
 	public Dictionnary()
 	{
 		this.Countries = new ArrayList<String>();
@@ -69,23 +69,32 @@ public class Dictionnary {
 	
 	public String getCountry(String input)
 	{
-		String finded;
 		for (int j = 0; j < this.Countries.size(); j++) {
-			finded = this.Countries.get(j);
-			for (int i = 0; i < finded.length(); i++) {
-				if (finded.charAt(i) == input.charAt(i)) {
-					i++;
-					while(finded.charAt(i) == input.charAt(i)) {
-						if (i >= 2) {
-							return finded;
+			this.finded = this.Countries.get(j);
+			for (int i = 0; i < this.finded.length(); i++) {
+				if (this.finded.charAt(0) == input.charAt(0)) {
+					while(i < input.length())
+					{
+						while(this.finded.charAt(i) == input.charAt(i) && i < input.length())
+						{
+							if(i >= 2)
+								return this.finded;
+							i++;
 						}
-						i++;
+						if(i < input.length())
+							i++;
 					}
 				}
 				else
 					break;
 			}
 		}
+		System.out.println("FINAL RETURN");
 		return  null;
+	}
+
+	public String getFinded()
+	{
+		return this.finded;
 	}
 }

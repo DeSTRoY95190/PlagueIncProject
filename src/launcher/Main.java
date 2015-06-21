@@ -12,21 +12,21 @@ import com.component.FrontierFileReaderClass;
 public class Main {
 
 	public static void main(String[] args) {
-		FrontierFileReaderClass read = new FrontierFileReaderClass(new File("res/Liaisons.csv"));
+		File file = new File("res/Liaisons.csv");
+		FrontierFileReaderClass read = new FrontierFileReaderClass(file);
 		ArrayList<String> fronts = new ArrayList<String>();
 		Dictionnary doc = new Dictionnary();
-		//doc.PrintDico();
-		String input = "Aus";
+		
+		/*
+		 * Vous devez avoir au moins 3 caractère dans input pour que ca marche...
+		 * 
+		 */
+		String input = "Afr";
 		try {		
-			fronts = read.getFrontiersForACountry(input);
+			fronts = read.getFrontiersForACountry(read.getBestIdea(input));
 			read.PrintFrontier(fronts);
 		} catch (NoCountry e) {
-			try {
-				fronts = read.getFrontiersForACountry(e.getBestIdea(input));
-				read.PrintFrontier(fronts);
-			} catch (NoCountry | NoFrontiers e1) {
-				e1.printStackTrace();
-			}
+			e.printStackTrace();
 		}catch(NoFrontiers e1)
 		{
 			e1.printStackTrace();

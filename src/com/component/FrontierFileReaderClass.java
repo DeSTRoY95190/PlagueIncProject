@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.Dictionnary;
+
 import Exceptions.NoCountry;
 import Exceptions.NoFrontiers;
 
@@ -86,6 +88,25 @@ public class FrontierFileReaderClass {
 
 	}
 
+	public String getBestIdea(String input)
+	{
+		Dictionnary dico = new Dictionnary();
+			if (!input.isEmpty() && input != null) {	
+				if (dico.getCountry(input) != null) {
+					System.err.println("We've tried to find the nearest country name of you input which is : " + dico.getFinded());
+					return dico.getCountry(input);
+				}
+				else{
+					System.out.println("null");
+				}
+			}else {
+				System.err.println("Can't make a supposition on the input because it is empty");
+			}
+			System.out.println("RETURN NULL");
+			return null;
+	}
+	
+	
 	public void PrintFrontier(ArrayList<String> list)
 	{
 		if (!list.isEmpty()) {
