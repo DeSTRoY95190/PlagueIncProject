@@ -7,7 +7,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class FileReaderClass {
+import Exceptions.NoCountry;
+import Exceptions.NoFrontiers;
+
+public class FrontierFileReaderClass {
 	private File 			file;
 	private FileReader 		_rw;
 	private BufferedReader 	reader;
@@ -15,7 +18,7 @@ public class FileReaderClass {
 	private String[]		Array;
 	private String[]		finale;
 	
-	public FileReaderClass(File _file)
+	public FrontierFileReaderClass(File _file)
 	{
 		this.file = _file;
 		try {
@@ -24,6 +27,8 @@ public class FileReaderClass {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		InitRead();
+		InitArray();
 	}
 	
 	public void InitRead()
@@ -50,9 +55,10 @@ public class FileReaderClass {
 			this.Array = this.TextLu.split("\n");
 			for (int i = 0; i < this.Array.length; i++) {
 				this.finale = this.Array[i].split(";");			
-				/*for (int j = 0; j < finale.length; j++) {
-					System.out.println("["+i+"]"+"["+j+"]"+this.finale[j]);
-				}*/
+				String tmp;
+				if ((tmp =this.finale[0]).startsWith("null")) {
+					finale[0] = tmp.substring(4, tmp.length());
+				}
 			}
 		}else {
 			System.err.println("[ERROR] Array is Empty");
@@ -60,6 +66,7 @@ public class FileReaderClass {
 
 	}
 
+	
 	public ArrayList<String> getFrontiersForACountry(String CountryName) throws NoCountry, NoFrontiers
 	{
 		ArrayList<String> findFrontier =  new ArrayList<String>();
@@ -75,7 +82,7 @@ public class FileReaderClass {
 				}
 			}
 		}
-		throw new NoCountry();
+		throw new NoCountry(CountryName, getThisFile());
 
 	}
 
@@ -88,6 +95,11 @@ public class FileReaderClass {
 		}
 	}
 
+	public File getThisFile()
+	{
+		return this.file;
+	}
+	
 	public String[] getFinale()
 	{
 		return this.finale;

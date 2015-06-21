@@ -1,4 +1,4 @@
-package com.component;
+package Exceptions;
 
 public class NoFrontiers extends Exception {
 	private boolean gotFrontiers;
