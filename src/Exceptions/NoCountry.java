@@ -2,8 +2,6 @@ package Exceptions;
 
 import java.io.File;
 
-import com.Dictionnary;
-
 public class NoCountry extends Exception {
 	private static final long serialVersionUID = 1L;
 
@@ -15,17 +13,18 @@ public class NoCountry extends Exception {
 	{
 		this._input = input;
 		this._File = file;
-		//getBestIdea(input);
-		printStackTrace();
 	}
 	
 	public void printStackTrace()
 	{
-		System.err.println("\n\n[ERROR] Sorry we can't find the country on the file\n");
+		System.err.println("[ERROR] Sorry we can't find the country on the file\n");
 		System.err.println("\nUse:\n-First letter must be Uppercase\n-Accents must be written");
 		
 	}
-	
+	public File getFile()
+	{
+		return this._File;
+	}
 	
 	public String getInput()
 	{

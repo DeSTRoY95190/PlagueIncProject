@@ -73,23 +73,25 @@ public class Dictionnary {
 			this.finded = this.Countries.get(j);
 			for (int i = 0; i < this.finded.length(); i++) {
 				if (this.finded.charAt(0) == input.charAt(0)) {
-					while(i < input.length())
+					int count = 0;
+					while(count < input.length())
 					{
-						while(this.finded.charAt(i) == input.charAt(i) && i < input.length())
+						if(this.finded.charAt(count) == input.charAt(count))
 						{
-							if(i >= 2)
+							if(count >= 2)
+							{
 								return this.finded;
-							i++;
+							}
+							count++;
 						}
-						if(i < input.length())
-							i++;
+						else
+							break;
 					}
 				}
 				else
 					break;
 			}
 		}
-		System.out.println("FINAL RETURN");
 		return  null;
 	}
 

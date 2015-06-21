@@ -91,19 +91,17 @@ public class FrontierFileReaderClass {
 	public String getBestIdea(String input)
 	{
 		Dictionnary dico = new Dictionnary();
-			if (!input.isEmpty() && input != null) {	
-				if (dico.getCountry(input) != null) {
-					System.err.println("We've tried to find the nearest country name of you input which is : " + dico.getFinded());
-					return dico.getCountry(input);
-				}
-				else{
-					System.out.println("null");
-				}
-			}else {
-				System.err.println("Can't make a supposition on the input because it is empty");
+		if (!input.isEmpty() && input != null) {	
+			String prediction = dico.getCountry(input);
+			if (prediction != null) {
+				System.err.println("We've tried to find the nearest country name of you input which is : " + dico.getFinded());
+				return prediction;
 			}
-			System.out.println("RETURN NULL");
-			return null;
+		}else {
+			System.err.println("Can't make a supposition on the input because it is empty");
+
+		}
+		return null;
 	}
 	
 	

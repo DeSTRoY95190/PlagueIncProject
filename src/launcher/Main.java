@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import Exceptions.NoCountry;
 import Exceptions.NoFrontiers;
 
-import com.Dictionnary;
 import com.component.FrontierFileReaderClass;
 
 public class Main {
@@ -15,18 +14,29 @@ public class Main {
 		File file = new File("res/Liaisons.csv");
 		FrontierFileReaderClass read = new FrontierFileReaderClass(file);
 		ArrayList<String> fronts = new ArrayList<String>();
-		Dictionnary doc = new Dictionnary();
 		
 		/*
-		 * Vous devez avoir au moins 3 caractère dans input pour que ca marche...
+		 * You must entered at least 3 characters to make it work
 		 * 
 		 */
-		String input = "Afr";
-		try {		
-			fronts = read.getFrontiersForACountry(read.getBestIdea(input));
-			read.PrintFrontier(fronts);
+		
+		String input = "Franc";
+		try {	
+			if (input.length() >= 3) {
+				fronts = read.getFrontiersForACountry(input);
+				read.PrintFrontier(fronts);
+			}
+			else{
+				System.err.println("[INFO] You must enter at least 3 letters to make it work ! but you've entered only " + input.length() + " characters !");
+				return;
+			}
 		} catch (NoCountry e) {
-			e.printStackTrace();
+			try {
+				fronts = read.getFrontiersForACountry(read.getBestIdea(input));
+				read.PrintFrontier(fronts);
+			} catch (NoCountry | NoFrontiers e1) {
+				e1.printStackTrace();
+			}
 		}catch(NoFrontiers e1)
 		{
 			e1.printStackTrace();
