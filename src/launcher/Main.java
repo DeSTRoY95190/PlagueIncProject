@@ -20,7 +20,7 @@ public class Main {
 		 * 
 		 */
 		
-		String input = "Franc";
+		String input = "All";
 		try {	
 			if (input.length() >= 3) {
 				fronts = read.getFrontiersForACountry(input);
